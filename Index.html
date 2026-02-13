@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+height:100vh;
+background:#060606;
+color:#f4f4f4;
+font-family:'Playfair Display',serif;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+text-align:center;
+}
+
+/* Heartbeat */
+.heart{
+font-size:40px;
+animation:beat 1.2s infinite;
+opacity:.8;
+}
+
+@keyframes beat{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.25)}
+}
+
+.text{
+font-size:24px;
+line-height:1.8;
+opacity:0;
+transition:opacity 1.5s ease;
+}
+
+.show{opacity:1;}
+
+.final{
+margin-top:20px;
+font-size:26px;
+}
+
+.name{
+font-family:'Dancing Script',cursive;
+font-size:48px;
+color:#E6C78A;
+margin-top:18px;
+opacity:0;
+transition:opacity 2s ease;
+}
+
+.bgWarm{
+background:radial-gradient(circle,#2b0f12,#060606);
+transition:background 3s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div id="scene">
+<div class="heart" id="heart">❤️</div>
+<div class="text" id="text"></div>
+<div class="final text" id="final"></div>
+<div class="name" id="name">Pranathi ❤️</div>
+</div>
+
+<script>
+
+const lines=[
+"It started with a rose…",
+"Then a smile…",
+"Then comfort…",
+"Then promises…",
+"Then closeness…",
+"Then a moment…"
+];
+
+let i=0;
+
+function showNext(){
+if(i<lines.length){
+const t=document.getElementById("text");
+t.classList.remove("show");
+setTimeout(()=>{
+t.innerHTML=lines[i];
+t.classList.add("show");
+},300);
+i++;
+}else{
+finish();
+clearInterval(loop);
+}
+}
+
+function finish(){
+document.body.classList.add("bgWarm");
+document.getElementById("heart").style.display="none";
+
+const final=document.getElementById("final");
+final.innerHTML="And today…<br>I don’t want a day.<br>I want us.";
+final.classList.add("show");
+
+setTimeout(()=>{
+document.getElementById("name").style.opacity="1";
+},1500);
+}
+
+const loop=setInterval(showNext,2200);
+showNext();
+
+</script>
+
+</body>
+</html>

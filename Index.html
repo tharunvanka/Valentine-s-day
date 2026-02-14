@@ -8,24 +8,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box;}
+
 body{
 margin:0;
 height:100vh;
-background:#060606;
-color:#f4f4f4;
 font-family:'Playfair Display',serif;
+color:#f4f4f4;
 display:flex;
 justify-content:center;
 align-items:center;
-overflow:hidden;
 text-align:center;
+overflow:hidden;
+
+/* background image */
+background:
+linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+url("valentine.jpg") center/cover no-repeat;
+
+transition:background 3s ease;
 }
 
-/* Heartbeat */
+/* warm ending */
+body.warm{
+background:
+linear-gradient(rgba(30,8,10,0.6), rgba(30,8,10,0.6)),
+url("valentine.jpg") center/cover no-repeat;
+}
+
+/* heartbeat */
 .heart{
-font-size:40px;
+font-size:38px;
 animation:beat 1.2s infinite;
-opacity:.8;
+opacity:.85;
+margin-bottom:20px;
 }
 
 @keyframes beat{
@@ -33,11 +49,13 @@ opacity:.8;
 50%{transform:scale(1.25)}
 }
 
+/* text */
 .text{
 font-size:24px;
 line-height:1.8;
 opacity:0;
-transition:opacity 1.5s ease;
+transition:opacity 1.4s ease;
+padding:0 20px;
 }
 
 .show{opacity:1;}
@@ -54,11 +72,6 @@ color:#E6C78A;
 margin-top:18px;
 opacity:0;
 transition:opacity 2s ease;
-}
-
-.bgWarm{
-background:radial-gradient(circle,#2b0f12,#060606);
-transition:background 3s ease;
 }
 </style>
 </head>
@@ -89,10 +102,12 @@ function showNext(){
 if(i<lines.length){
 const t=document.getElementById("text");
 t.classList.remove("show");
+
 setTimeout(()=>{
 t.innerHTML=lines[i];
 t.classList.add("show");
 },300);
+
 i++;
 }else{
 finish();
@@ -101,7 +116,7 @@ clearInterval(loop);
 }
 
 function finish(){
-document.body.classList.add("bgWarm");
+document.body.classList.add("warm");
 document.getElementById("heart").style.display="none";
 
 const final=document.getElementById("final");
@@ -113,7 +128,7 @@ document.getElementById("name").style.opacity="1";
 },1500);
 }
 
-const loop=setInterval(showNext,2200);
+const loop=setInterval(showNext,2300);
 showNext();
 
 </script>

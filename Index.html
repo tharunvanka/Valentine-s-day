@@ -8,40 +8,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;}
+*{box-sizing:border-box;margin:0;padding:0;}
 
 body{
-margin:0;
 height:100vh;
 font-family:'Playfair Display',serif;
 color:#f4f4f4;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
 overflow:hidden;
 
-/* background image */
+/* background */
 background:
-linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)),
 url("valentine.jpg") center/cover no-repeat;
-
-transition:background 3s ease;
 }
 
-/* warm ending */
-body.warm{
-background:
-linear-gradient(rgba(30,8,10,0.6), rgba(30,8,10,0.6)),
-url("valentine.jpg") center/cover no-repeat;
+/* content positioned bottom */
+.container{
+position:absolute;
+bottom:12%;
+left:50%;
+transform:translateX(-50%);
+width:85%;
+max-width:420px;
+text-align:center;
 }
 
 /* heartbeat */
 .heart{
-font-size:38px;
+font-size:34px;
 animation:beat 1.2s infinite;
-opacity:.85;
-margin-bottom:20px;
+opacity:.9;
+margin-bottom:12px;
 }
 
 @keyframes beat{
@@ -49,27 +46,25 @@ margin-bottom:20px;
 50%{transform:scale(1.25)}
 }
 
-/* text */
 .text{
-font-size:24px;
+font-size:22px;
 line-height:1.8;
 opacity:0;
 transition:opacity 1.4s ease;
-padding:0 20px;
 }
 
 .show{opacity:1;}
 
 .final{
-margin-top:20px;
-font-size:26px;
+margin-top:18px;
+font-size:20px;
 }
 
 .name{
 font-family:'Dancing Script',cursive;
 font-size:48px;
 color:#E6C78A;
-margin-top:18px;
+margin-top:20px;
 opacity:0;
 transition:opacity 2s ease;
 }
@@ -78,10 +73,10 @@ transition:opacity 2s ease;
 
 <body>
 
-<div id="scene">
+<div class="container">
 <div class="heart" id="heart">❤️</div>
 <div class="text" id="text"></div>
-<div class="final text" id="final"></div>
+<div class="text final" id="final"></div>
 <div class="name" id="name">Pranathi ❤️</div>
 </div>
 
@@ -96,9 +91,11 @@ const lines=[
 "Then a moment…"
 ];
 
-let i=0;
+let i=-1;
 
 function showNext(){
+i++;
+
 if(i<lines.length){
 const t=document.getElementById("text");
 t.classList.remove("show");
@@ -108,7 +105,6 @@ t.innerHTML=lines[i];
 t.classList.add("show");
 },300);
 
-i++;
 }else{
 finish();
 clearInterval(loop);
@@ -116,11 +112,10 @@ clearInterval(loop);
 }
 
 function finish(){
-document.body.classList.add("warm");
 document.getElementById("heart").style.display="none";
 
 const final=document.getElementById("final");
-final.innerHTML="And today…<br>I don’t want a day.<br>I want us.";
+final.innerHTML=`Love you bab… my honey cake, little cake, my pookie puu, my apple pie 😘😘<br><br>Happy Valentine’s Day 💌`;
 final.classList.add("show");
 
 setTimeout(()=>{
@@ -128,7 +123,7 @@ document.getElementById("name").style.opacity="1";
 },1500);
 }
 
-const loop=setInterval(showNext,2300);
+const loop=setInterval(showNext,2400);
 showNext();
 
 </script>
